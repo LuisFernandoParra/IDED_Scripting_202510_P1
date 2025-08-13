@@ -6,7 +6,14 @@ namespace TestProject1
     {
         internal static uint StackFirstPrime(Stack<uint> stack)
         {
-            return 0;
+
+            foreach (var num in stack)
+            {
+                if (EsPrimo(num))
+                    return num;
+            }
+
+            return 0; ;
         }
 
         internal static Stack<uint> RemoveFirstPrime(Stack<uint> stack)
@@ -21,12 +28,24 @@ namespace TestProject1
 
         internal static List<uint> StackToList(Stack<uint> stack)
         {
-            return null;
+            return new List<uint>(stack);
         }
 
         internal static bool FoundElementAfterSorted(List<int> list, int value)
         {
-            return false;
+            list.Sort();
+
+            return list.Contains(value);
+        }
+
+        static bool EsPrimo(int num)
+        {
+            if (num < 2) return false;
+            for (int i = 2; i <= Math.Sqrt(num); i++)
+            {
+                if (num % i == 0) return false;
+            }
+            return true;
         }
     }
 }
