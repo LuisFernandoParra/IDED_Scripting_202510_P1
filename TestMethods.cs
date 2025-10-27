@@ -6,24 +6,64 @@ namespace TestProject1
     {
         internal static uint StackFirstPrime(Stack<uint> stack)
         {
-
-            foreach (var num in stack)
+            Stack<uint> Aux = new Stack<uint>();
+            uint result = 0;
+            while (stack.Count > 0)
             {
-                if (EsPrimo(num))
-                    return num;
+                uint current = stack.Pop();
+                if (EsPrimo(current))
+                {
+                    result = current;
+                    Aux.Push(current);
+                    break;
+                }
+                Aux.Push(current);
             }
 
-            return 0; ;
+            while (Aux.Count > 0)
+            {
+                stack.Push(Aux.Pop());
+            }
+            return result;
+
+
         }
 
         internal static Stack<uint> RemoveFirstPrime(Stack<uint> stack)
         {
-            return null;
+            Stack<uint> Aux = new Stack<uint>();
+            bool eliminado = false;
+            while (stack.Count > 0)
+            {
+                uint current = stack.Pop();
+                if (!eliminado && EsPrimo(current))
+                {
+                    eliminado = true;
+                    continue;
+                }
+                Aux.Push(current);
+            }
+
+            while (Aux.Count > 0)
+            {
+                stack.Push(Aux.Pop());
+            }
+            return stack;
         }
 
         internal static Queue<uint> CreateQueueFromStack(Stack<uint> stack)
         {
-            return null;
+            Queue<uint> queue = new Queue<uint>();
+            Stack<uint> Aux = new Stack<uint>();
+            foreach (uint item in stack)
+            {
+                Aux.Push(item);
+            }
+            while (Aux.Count > 0)
+            {
+                queue.Enqueue(Aux.Pop());
+            }
+            return queue;
         }
 
         internal static List<uint> StackToList(Stack<uint> stack)
@@ -33,15 +73,32 @@ namespace TestProject1
 
         internal static bool FoundElementAfterSorted(List<int> list, int value)
         {
-            list.Sort();
-
-            return list.Contains(value);
+          for (int i = 0; i < list.Count - 1; i++)
+            {
+                for (int j = i + 1; j < list.Count; j++)
+                {
+                    if (list[j] < list[i])
+                    {
+                        int temp = list[i];
+                        list[i] = list[j];
+                        list[j] = temp;
+                    }
+                }
+            }
+            foreach (int item in list)
+            {
+                if (item == value)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
-        static bool EsPrimo(int num)
+        static bool EsPrimo(uint num)
         {
             if (num < 2) return false;
-            for (int i = 2; i <= Math.Sqrt(num); i++)
+            for (uint i = 2; i * i <= num; i++)
             {
                 if (num % i == 0) return false;
             }
