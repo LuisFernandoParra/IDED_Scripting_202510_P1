@@ -57,13 +57,11 @@ namespace TestProject1
             Stack<uint> Aux = new Stack<uint>();
             foreach (uint item in stack)
             {
-                Aux.Push(item);
+                queue.Enqueue(item);
             }
-            while (Aux.Count > 0)
-            {
-                queue.Enqueue(Aux.Pop());
-            }
+            
             return queue;
+
         }
 
         internal static List<uint> StackToList(Stack<uint> stack)
