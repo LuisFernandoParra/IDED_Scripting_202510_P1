@@ -18,10 +18,7 @@ namespace TestProject1
                     Aux.Push(current);
                     break;
                 }
-                else
-                {
-                    result = 0;
-                }
+              
 
                     Aux.Push(current);
             }
