@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 namespace TestProject1
 {
@@ -17,7 +18,12 @@ namespace TestProject1
                     Aux.Push(current);
                     break;
                 }
-                Aux.Push(current);
+                else
+                {
+                    result = 0;
+                }
+
+                    Aux.Push(current);
             }
 
             while (Aux.Count > 0)
@@ -54,8 +60,8 @@ namespace TestProject1
         internal static Queue<uint> CreateQueueFromStack(Stack<uint> stack)
         {
             Queue<uint> queue = new Queue<uint>();
-            Stack<uint> Aux = new Stack<uint>();
-            foreach (uint item in Aux)
+
+            foreach (uint item in stack)
             {
                 queue.Enqueue(item);
             }
@@ -82,7 +88,7 @@ namespace TestProject1
                         list[j] = temp;
                     }
                 }
-            }
+          }
             foreach (int item in list)
             {
                 if (item == value)
