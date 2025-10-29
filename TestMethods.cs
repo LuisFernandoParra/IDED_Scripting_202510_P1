@@ -55,7 +55,7 @@ namespace TestProject1
         {
             Queue<uint> queue = new Queue<uint>();
             Stack<uint> Aux = new Stack<uint>();
-            foreach (uint item in stack)
+            foreach (uint item in Aux)
             {
                 queue.Enqueue(item);
             }
